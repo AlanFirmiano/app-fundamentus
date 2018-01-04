@@ -53,7 +53,8 @@ export class HomePage {
                 this.workInTable(tableSplit[1]); //1º tebela
                 this.workInTable(tableSplit[2]); //2º tebela
                 this.workIn3Table(tableSplit[3]); //3º tebela
-                //this.workInTable(tableSplit[4]); //4º tebela
+                this.workIn3Table(tableSplit[4]); //4º tebela
+                this.workIn3Table(tableSplit[5]); //5º tebela
 
                 this.fecharCarregandoHome();
                 if (this.isRefreshing) {
@@ -75,18 +76,21 @@ export class HomePage {
         this.initializeItems();
     }
 
+    // This function work in 1° and 2º table
     workInTable(table: string) {
         var arrItems = table.split("<span class=\"txt\">");
         arrItems.shift();
         this.getItemRecursive(arrItems);
     }
 
+    // This function work in 3°, 4º and 5° table
     workIn3Table(table: string){
         var arrItems = table.split("<span class=\"txt\">");
         //arrItems.shift();
         this.getItemRecursive3(arrItems);
     }
 
+    // This function work in 1° and 2º table
     getItemRecursive(arrayHtml: Array<string>) {
         if (arrayHtml.length <= 0)
             return;
@@ -107,11 +111,12 @@ export class HomePage {
         this.getItemRecursive(arrayHtml);
     }
 
+    // This function work in 3°, 4º and 5° tables
     getItemRecursive3(arrayHtml: Array<string>) {
         if (arrayHtml.length <= 0)
             return;
         let begin = arrayHtml[0];
-        if(begin.indexOf("class=\"nivel1\"") !== -1){
+        if(begin.indexOf("class=\"nivel1\"") !== -1 || begin.indexOf("class=\"nivel2\"") !== -1){
             arrayHtml.shift();
             this.getItemRecursive3(arrayHtml);
             return;
