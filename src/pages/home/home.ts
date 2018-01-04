@@ -42,8 +42,10 @@ export class HomePage {
     this.acoesProvider.getDataFundamentus().subscribe(
       res=>{
         const response = (res as any);
-        const objeto = JSON.parse(response._body);
-        this.data = objeto.data;
+        const objeto = (response._body);
+        this.data = objeto;
+
+        console.log(this.data);
 
         this.fecharCarregandoHome();
         if(this.isRefreshing){
@@ -60,5 +62,8 @@ export class HomePage {
         }
       }
     );
+  }
+  ionViewDidEnter() {
+    this.initializeItems();
   }
 }
