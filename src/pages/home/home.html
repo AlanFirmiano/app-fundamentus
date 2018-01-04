@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <h2>Dados Fundamentus</h2>
-  <p>
-    {{this.data}}
-  </p>
+  <ul>
+    <li *ngFor="let item of items1" >{{ item.key + ": " + item.value }}</li>
+  </ul>
 </ion-content>
