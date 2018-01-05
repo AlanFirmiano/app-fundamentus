@@ -5,13 +5,17 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Tabelas 1 e 2</h2>
-  <ul>
-    <li *ngFor="let item of items1">{{ item.key + ": " + item.value }}</li>
-  </ul>
+  <ion-list>
 
-  <h2>Tabela 3, 4 e 5</h2>
-  <ul>
-    <li *ngFor="let item of items3">{{ item.key + ": " + item.value }}</li>
-  </ul>
+    <ion-item>
+      <ion-label>Papel</ion-label>
+      <ion-input type="text" ngForm="papel"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-content>
+      <p *ngFor="let item of items1">{{item.key + ": " + item.value}}</p>
+      <p *ngFor="let item of items3">{{item.key + ": " + item.value}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

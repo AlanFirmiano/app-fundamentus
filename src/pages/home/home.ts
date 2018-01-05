@@ -10,6 +10,7 @@ import { AcoesProvider } from "../../providers/acoes/acoes";
     ]
 })
 export class HomePage {
+    public papel:string;
     public data: string;
     public loader;
     public refresher;
@@ -43,12 +44,12 @@ export class HomePage {
 
     initializeItems() {
         this.abrirCarregandoHome();
-        this.acoesProvider.getDataFundamentus().subscribe(
+        this.papel="VALE3";
+        this.acoesProvider.getDataFundamentus(this.papel).subscribe(
             res => {
                 const response = (res as any);
                 const objeto = (response._body);
                 this.data = objeto;
-
                 let tableSplit = this.data.split("<table class=\"w728\">");
                 this.workInTable(tableSplit[1]); //1º tebela
                 this.workInTable(tableSplit[2]); //2º tebela
@@ -80,14 +81,16 @@ export class HomePage {
     workInTable(table: string) {
         var arrItems = table.split("<span class=\"txt\">");
         arrItems.shift();
-        this.getItemRecursive(arrItems);
+        if(this.items1.length<11)
+          this.getItemRecursive(arrItems);
     }
 
     // This function work in 3°, 4º and 5° table
     workIn3Table(table: string){
         var arrItems = table.split("<span class=\"txt\">");
         //arrItems.shift();
-        this.getItemRecursive3(arrItems);
+        if(this.items3.length<43)
+          this.getItemRecursive3(arrItems);
     }
 
     // This function work in 1° and 2º table
@@ -144,7 +147,7 @@ export class HomePage {
             value = itemValueHtml.split("</span>")[0];
             arrayHtml.shift();
         }
-        
+
         let item = {
             "key": key,
             "value" : value

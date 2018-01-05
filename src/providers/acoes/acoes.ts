@@ -19,7 +19,7 @@ export class AcoesProvider {
   {
   }
 
-  getDataFundamentus(){
-    return this.http.get(this.fundamentus+"/detalhes.php?papel=QUAL3&x=25&y=11");
+  getDataFundamentus(papel:string){
+    return this.http.get(this.fundamentus+"/detalhes.php?papel="+papel);
   }
 }
