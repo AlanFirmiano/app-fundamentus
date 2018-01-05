@@ -12,6 +12,7 @@ import {Platform} from "ionic-angular";
 @Injectable()
 export class AcoesProvider {
   fundamentus = "/fundamentus";
+  papel:string;
   constructor(
     public http: Http,
     private platform:Platform
@@ -20,6 +21,7 @@ export class AcoesProvider {
   }
 
   getDataFundamentus(papel:string){
-    return this.http.get(this.fundamentus+"/detalhes.php?papel="+papel);
+    this.papel=papel;
+    return this.http.get(this.fundamentus+"/detalhes.php?papel="+this.papel);
   }
 }

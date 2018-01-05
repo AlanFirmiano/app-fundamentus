@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
 import { AcoesProvider } from "../../providers/acoes/acoes";
+import {noUndefined} from "@angular/compiler/src/util";
+import {unescapeIdentifier} from "@angular/compiler";
 
 @Component({
     selector: 'page-home',
@@ -24,7 +26,9 @@ export class HomePage {
         public navParams: NavParams,
         private acoesProvider: AcoesProvider,
         public loadingCtrl: LoadingController
-    ) { }
+    ) {
+      this.papel = "";
+    }
 
     doRefresh(refresher) {
         this.refresher = refresher;
@@ -41,15 +45,25 @@ export class HomePage {
     fecharCarregandoHome() {
         this.loader.dismiss();
     }
+    setPapel(papel:string){
+      this.papel = papel;
+      this.items1 = [];
+      this.items3 = [];
+      this.initializeItems();
+    }
 
     initializeItems() {
         this.abrirCarregandoHome();
-        this.papel="VALE3";
+        if(this.papel == ""){
+          this.papel = "QUAL3";
+        }
+
+
         this.acoesProvider.getDataFundamentus(this.papel).subscribe(
             res => {
                 const response = (res as any);
                 const objeto = (response._body);
-                this.data = objeto;
+                this.data = unescapeIdentifier(objeto);
                 let tableSplit = this.data.split("<table class=\"w728\">");
                 this.workInTable(tableSplit[1]); //1º tebela
                 this.workInTable(tableSplit[2]); //2º tebela
@@ -81,7 +95,7 @@ export class HomePage {
     workInTable(table: string) {
         var arrItems = table.split("<span class=\"txt\">");
         arrItems.shift();
-        if(this.items1.length<11)
+        //if(this.items1.length<11)
           this.getItemRecursive(arrItems);
     }
 
@@ -89,7 +103,7 @@ export class HomePage {
     workIn3Table(table: string){
         var arrItems = table.split("<span class=\"txt\">");
         //arrItems.shift();
-        if(this.items3.length<43)
+        //if(this.items3.length<43)
           this.getItemRecursive3(arrItems);
     }
 

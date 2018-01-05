@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Dados</ion-title>
+    <ion-title>Dados Fundamentus</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,9 +9,12 @@
 
     <ion-item>
       <ion-label>Papel</ion-label>
-      <ion-input type="text" ngForm="papel"></ion-input>
+      <ion-input id="valor" type="text" [(ngModel)]="papel" [ngModelOptions]="{standalone: true}"></ion-input>
     </ion-item>
   </ion-list>
+  <div>
+    <button class="button-md-primary" block (click)="setPapel(papel)">Buscar</button>
+  </div>
   <ion-card>
     <ion-card-content>
       <p *ngFor="let item of items1">{{item.key + ": " + item.value}}</p>
